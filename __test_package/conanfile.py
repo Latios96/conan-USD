@@ -9,8 +9,8 @@ class USDTestConan(ConanFile):
 
     def build(self):
         cmake = CMake(self)
-        # Current dir is "test_package/build/<build_id>" and CMakeLists.txt is
-        # in "test_package"
+        # Current dir is "__test_package/build/<build_id>" and CMakeLists.txt is
+        # in "__test_package"
         cmake.configure()
         cmake.build()
 
