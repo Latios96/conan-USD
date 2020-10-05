@@ -1,5 +1,5 @@
-#include <iostream>
+#include <pxr/usd/usd/stage.h>
 
 int main() {
-    std::cout << "Hello world" << std::endl;
+    UsdStage::CreateInMemory();
 }
