@@ -16,7 +16,7 @@ class USDConan(ConanFile):
     generators = "cmake"
 
     requires = (
-        "boost/1.70.0",
+        "boost/1.61.0",
         "zlib/1.2.11",
         "tbb/2020.2",
     )
