@@ -31,6 +31,7 @@ class USDConan(ConanFile):
         cmake.definitions["PXR_ENABLE_PYTHON_SUPPORT"] = False
         cmake.definitions["PXR_BUILD_IMAGING"] = False
         cmake.definitions["BUILD_SHARED_LIBS"] = False
+        cmake.definitions["PXR_BUILD_TESTS"] = False
         cmake.configure(source_folder="USD-{}".format(self.version))
         return cmake
 
