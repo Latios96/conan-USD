@@ -14,7 +14,6 @@ linux: &linux
 osx: &osx
    os: osx
    language: python
-   env: PYTHON_VERSION=3.6.2
 matrix:
    include:
 

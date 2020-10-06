@@ -4,8 +4,8 @@ set -e
 set -x
 
 
-pip install conan --upgrade
-pip install conan_package_tools
+pip3 install conan --upgrade
+pip3 install conan_package_tools
 
 conan user
 conan profile new default --detect
