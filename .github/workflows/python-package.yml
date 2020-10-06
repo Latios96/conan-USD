@@ -26,8 +26,10 @@ jobs:
         pip install conan
     - name: g++ version
       run: g++ --version
+    - name: setup default conan profile
+        run: conan profile new default --detect
+    - name: Update ABI settings
+        run: conan profile update settings.compiler.libcxx=libstdc++11 default
     - name: Build Conan package
       run: |
-        conan profile new default --detect
-        conan profile update settings.compiler.libcxx=libstdc++11 default
         conan create . Latios96/stable
