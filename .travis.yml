@@ -51,7 +51,6 @@ matrix:
       - <<: *osx
         osx_image: xcode10
         env: CONAN_APPLE_CLANG_VERSIONS=10.0
-
       - <<: *osx
           osx_image: xcode11
           env: CONAN_APPLE_CLANG_VERSIONS=11.0
