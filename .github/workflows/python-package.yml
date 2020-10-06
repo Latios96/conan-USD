@@ -25,4 +25,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install conan
     - name: Build Conan package
-      run: conan create . Latios96/stable
+      run: |
+        g++ --version
+        conan create . Latios96/stable
