@@ -28,6 +28,6 @@ jobs:
       run: g++ --version
     - name: Build Conan package
       run: |
-        conan profile new
+        conan profile new default --detect
         conan profile update settings.compiler.libcxx=libstdc++11 default
         conan create . Latios96/stable
