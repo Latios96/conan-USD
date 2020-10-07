@@ -73,3 +73,7 @@ class USDConan(ConanFile):
             "trace",
             "usdRender",
             "usdVol"]
+
+    def imports(self):
+        self.copy("*.dll", "", "bin")
+        self.copy("*.dylib", "", "lib")
