@@ -12,7 +12,7 @@ class USDConan(ConanFile):
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    default_options = {"shared": True}
     generators = "cmake"
 
     requires = (
@@ -31,7 +31,7 @@ class USDConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions["PXR_ENABLE_PYTHON_SUPPORT"] = False
         cmake.definitions["PXR_BUILD_IMAGING"] = False
-        cmake.definitions["BUILD_SHARED_LIBS"] = False
+        cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["PXR_BUILD_TESTS"] = False
         cmake.definitions["PXR_BUILD_EXAMPLES"] = False
         cmake.configure(source_folder="USD-{}".format(self.version))
