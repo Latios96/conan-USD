@@ -1,4 +1,6 @@
-
+cache:
+  directories:
+    - ~/.conan/
 env:
    global:
      - CONAN_REFERENCE: "USD/20.08"
