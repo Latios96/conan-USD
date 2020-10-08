@@ -20,15 +20,26 @@ matrix:
    include:
 
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=7
+        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Release
 
       - <<: *osx
         osx_image: xcode11
-        env: CONAN_APPLE_CLANG_VERSIONS=11.0
+        env: CONAN_APPLE_CLANG_VERSIONS=11.0 CONAN_BUILD_TYPES=Release
 
       - <<: *osx
         osx_image: xcode10
-        env: CONAN_APPLE_CLANG_VERSIONS=10.0
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD_TYPES=Release
+
+      - <<: *linux
+        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Debug
+
+      - <<: *osx
+        osx_image: xcode11
+        env: CONAN_APPLE_CLANG_VERSIONS=11.0 CONAN_BUILD_TYPES=Debug
+
+      - <<: *osx
+        osx_image: xcode10
+        env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD_TYPES=Debug
 
 install:
   - chmod +x .travis/install.sh
