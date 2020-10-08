@@ -19,7 +19,6 @@ class USDConan(ConanFile):
         "boost/1.70.0",
         "zlib/1.2.11",
         "tbb/2020.2",
-        "OpenSubdiv/3.4.3@latios96/stable",
         "glew/2.1.0"
     )
 
@@ -54,6 +53,7 @@ class USDConan(ConanFile):
     def requirements(self):
         if self.options.with_imaging:
             self.requires("glew/2.1.0")
+            self.requires("OpenSubdiv/3.4.3@latios96/stable")
 
     def package_info(self):
         self.cpp_info.libs = [
