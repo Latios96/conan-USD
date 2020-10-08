@@ -17,7 +17,7 @@ matrix:
    include:
 
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Release
+        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Release CONAN_SHARED=FALSE
 
       - <<: *osx
         osx_image: xcode11
@@ -28,7 +28,7 @@ matrix:
         env: CONAN_APPLE_CLANG_VERSIONS=10.0 CONAN_BUILD_TYPES=Release
 
       - <<: *linux
-        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Debug
+        env: CONAN_GCC_VERSIONS=7 CONAN_BUILD_TYPES=Debug CONAN_SHARED=FALSE
 
       - <<: *osx
         osx_image: xcode11
