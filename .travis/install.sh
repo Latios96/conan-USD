@@ -21,5 +21,5 @@ if [[ "$(uname -s)" != 'Darwin' ]]; then
 fi
 
 conan remote add my_bintray https://api.bintray.com/conan/latios96/my_conan
-conan remote show
+conan remote list
 
