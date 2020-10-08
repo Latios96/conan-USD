@@ -19,7 +19,7 @@ class USDConan(ConanFile):
         "boost/1.70.0",
         "zlib/1.2.11",
         "tbb/2020.2",
-        "OpenSubdiv/3.4.3@Latios96/stable",
+        "OpenSubdiv/3.4.3@latios96/stable",
         "glew/2.1.0"
     )
 
