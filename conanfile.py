@@ -11,14 +11,16 @@ class USDConan(ConanFile):
     description = "<Description of USD here>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = {"shared": True}
+    options = {"shared": [True, False], "with_imaging": [True, False], }
+    default_options = {"shared": False, "with_imaging": True}
     generators = "cmake"
 
     requires = (
         "boost/1.70.0",
         "zlib/1.2.11",
         "tbb/2020.2",
+        "OpenSubdiv/3.4.3@Latios96/stable",
+        "glew/2.1.0"
     )
 
     def source(self):
@@ -26,14 +28,18 @@ class USDConan(ConanFile):
 
     def _configure_cmake(self):
         os.environ.update({
-            "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath
+            "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
+            "GLEW_ROOT": self.deps_cpp_info["glew"].rootpath,
+            "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath
         })
         cmake = CMake(self)
         cmake.definitions["PXR_ENABLE_PYTHON_SUPPORT"] = False
-        cmake.definitions["PXR_BUILD_IMAGING"] = False
+        cmake.definitions["PXR_BUILD_IMAGING"] = self.options.with_imaging
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["PXR_BUILD_TESTS"] = False
         cmake.definitions["PXR_BUILD_EXAMPLES"] = False
+        cmake.definitions["PXR_ENABLE_PTEX_SUPPORT"] = False
+        cmake.definitions["PXR_ENABLE_METAL_SUPPORT"] = False
         cmake.configure(source_folder="USD-{}".format(self.version))
         return cmake
 
@@ -44,6 +50,10 @@ class USDConan(ConanFile):
     def package(self):
         cmake = self._configure_cmake()
         cmake.install()
+
+    def requirements(self):
+        if self.options.with_imaging:
+            self.requires("glew/2.1.0")
 
     def package_info(self):
         self.cpp_info.libs = [
