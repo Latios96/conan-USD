@@ -28,7 +28,7 @@ class USDConan(ConanFile):
     def _configure_cmake(self):
         os.environ.update({
             "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
-            "GLEW_ROOT": self.deps_cpp_info["glew"].rootpath,
+            "GLEW_LOCATION": self.deps_cpp_info["glew"].rootpath,
             "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath
         })
         cmake = CMake(self)
