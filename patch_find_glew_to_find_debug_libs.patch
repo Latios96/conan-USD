@@ -1,0 +1,13 @@
+diff --git a/USD-20.08/cmake/modules/FindGLEW.cmake b/cmake/modules/FindGLEW.cmake
+index b27be0711..434ed560e 100644
+--- USD-20.08/cmake/modules/FindGLEW.cmake
++++ USD-20.08/cmake/modules/FindGLEW.cmake
+@@ -82,7 +82,7 @@ if (${CMAKE_HOST_UNIX})
+     )
+     find_library( GLEW_LIBRARY
+         NAMES
+-            GLEW glew
++            GLEW glew GLEWd glewd
+         HINTS
+             "${GLEW_LOCATION}/lib"
+             "${GLEW_LOCATION}/lib64"

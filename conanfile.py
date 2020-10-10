@@ -14,6 +14,7 @@ class USDConan(ConanFile):
     options = {"shared": [True, False], "with_imaging": [True, False], }
     default_options = {"shared": False, "with_imaging": True}
     generators = "cmake"
+    exports_sources = 'patch_find_glew_to_find_debug_libs.patch'
 
     requires = (
         "boost/1.70.0",
@@ -24,6 +25,7 @@ class USDConan(ConanFile):
 
     def source(self):
         tools.get("https://github.com/PixarAnimationStudios/USD/archive/v{}.tar.gz".format(self.version))
+        tools.patch(patch_file='patch_find_glew_to_find_debug_libs.patch')
 
     def _configure_cmake(self):
         os.environ.update({
