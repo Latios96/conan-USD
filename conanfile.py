@@ -12,7 +12,7 @@ class USDConan(ConanFile):
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "with_imaging": [True, False], }
-    default_options = {"shared": False, "with_imaging": True}
+    default_options = {"shared": True, "with_imaging": False, "boost:layout": "b2-default"}
     generators = "cmake"
     exports_sources = 'patch_find_glew_to_find_debug_libs.patch'
 
@@ -24,15 +24,19 @@ class USDConan(ConanFile):
     )
 
     def source(self):
-        tools.get("https://github.com/PixarAnimationStudios/USD/archive/v{}.tar.gz".format(self.version))
+        tools.get("https://github.com/PixarAnimationStudios/USD/archive/v{}.zip".format(self.version))
         tools.patch(patch_file='patch_find_glew_to_find_debug_libs.patch')
 
     def _configure_cmake(self):
         os.environ.update({
             "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
             "GLEW_LOCATION": self.deps_cpp_info["glew"].rootpath,
-            "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath
         })
+
+        if self.options.with_imaging:
+            os.environ.update({
+                "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath})
+
         cmake = CMake(self)
         cmake.definitions["PXR_ENABLE_PYTHON_SUPPORT"] = False
         cmake.definitions["PXR_BUILD_IMAGING"] = self.options.with_imaging
@@ -41,6 +45,8 @@ class USDConan(ConanFile):
         cmake.definitions["PXR_BUILD_EXAMPLES"] = False
         cmake.definitions["PXR_ENABLE_PTEX_SUPPORT"] = False
         cmake.definitions["PXR_ENABLE_METAL_SUPPORT"] = False
+        cmake.definitions["Boost_USE_STATIC_LIBS"] = True
+        cmake.definitions["-DBOOST_AUTO_LINK_SYSTEM"] = True
         cmake.configure(source_folder="USD-{}".format(self.version))
         return cmake
 
