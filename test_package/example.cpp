@@ -1,3 +1,4 @@
+#define NOMINMAX
 #include <pxr/usd/usd/stage.h>
 #include <iostream>
 int main() {
