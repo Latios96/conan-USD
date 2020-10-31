@@ -61,6 +61,7 @@ class USDConan(ConanFile):
 
         if self.settings.os == "Windows":
             self.copy("**.dll", 'bin', '',keep_path=False)
+            self.copy("**.lib", 'bin', '',keep_path=False)
 
     def requirements(self):
         if self.options.with_imaging:
