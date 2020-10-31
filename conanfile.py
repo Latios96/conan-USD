@@ -15,6 +15,7 @@ class USDConan(ConanFile):
     default_options = {"shared": True, "with_imaging": False, "boost:layout": "b2-default"}
     generators = "cmake"
     exports_sources = 'patch_find_glew_to_find_debug_libs.patch'
+    short_paths = True
 
     requires = (
         "boost/1.70.0",
@@ -57,6 +58,9 @@ class USDConan(ConanFile):
     def package(self):
         cmake = self._configure_cmake()
         cmake.install()
+
+        if self.settings.os == "Windows":
+            self.copy("**.dll", 'bin', '',keep_path=False)
 
     def requirements(self):
         if self.options.with_imaging:
