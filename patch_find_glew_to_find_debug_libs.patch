@@ -1,8 +1,20 @@
 diff --git a/USD-20.08/cmake/modules/FindGLEW.cmake b/cmake/modules/FindGLEW.cmake
-index b27be0711..434ed560e 100644
+index b27be07..57bf4d0 100644
 --- USD-20.08/cmake/modules/FindGLEW.cmake
 +++ USD-20.08/cmake/modules/FindGLEW.cmake
-@@ -82,7 +82,7 @@ if (${CMAKE_HOST_UNIX})
+@@ -51,9 +51,10 @@ if (WIN32)
+
+     find_library(GLEW_LIBRARY
+         NAMES
+-            glew GLEW glew32 glew32s
++            glew GLEW glew32 glew32s glew32d libglew32
+         HINTS
+             "${GLEW_LOCATION}/lib"
++            "${GLEW_LOCATION}/bin"
+             "$ENV{GLEW_LOCATION}/lib"
+         PATHS
+             "$ENV{PROGRAMFILES}/GLEW/lib"
+@@ -82,7 +83,7 @@ if (${CMAKE_HOST_UNIX})
      )
      find_library( GLEW_LIBRARY
          NAMES

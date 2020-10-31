@@ -12,7 +12,7 @@ class USDConan(ConanFile):
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "with_imaging": [True, False], }
-    default_options = {"shared": True, "with_imaging": False, "boost:layout": "b2-default"}
+    default_options = {"shared": True, "with_imaging": True, "boost:layout": "b2-default", "glew:shared": True}
     generators = "cmake"
     exports_sources = 'patch_find_glew_to_find_debug_libs.patch'
     short_paths = True
