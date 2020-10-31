@@ -39,6 +39,8 @@ class USDConan(ConanFile):
                 "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath})
 
         cmake = CMake(self)
+        if self.settings.build_type == "Debug":
+            cmake.definitions["TBB_USE_DEBUG_BUILD"] = True
         cmake.definitions["PXR_ENABLE_PYTHON_SUPPORT"] = False
         cmake.definitions["PXR_BUILD_IMAGING"] = self.options.with_imaging
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
