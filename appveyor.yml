@@ -1,0 +1,25 @@
+build: false
+
+environment:
+  PYTHON: "C:\Python37-x64"
+
+  CONAN_REFERENCE: "USD/20.08"
+  CONAN_USERNAME: "latios96"
+  CONAN_LOGIN_USERNAME: "latios96"
+  CONAN_CHANNEL: "stable"
+  CONAN_UPLOAD: "https://api.bintray.com/conan/latios96/my_conan"
+
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      CONAN_VISUAL_VERSIONS: 15
+
+install:
+  - C:\Python37-x64\Scripts\pip.exe install conan --upgrade
+  - C:\Python37-x64\Scripts\pip.exe install conan_package_tools
+  - C:\Python37-x64\Scripts\conan user # It creates the conan data directory
+
+test_script:
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=False -o USD:with_imaging=False -s build_type=Release -s compiler.version=%CONAN_VISUAL_VERSIONS%
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=False -o USD:with_imaging=True -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS%
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=False -o USD:with_imaging=False -s build_type=Release -s compiler.version=%CONAN_VISUAL_VERSIONS%
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=False -o USD:with_imaging=True -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS%
