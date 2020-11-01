@@ -11,32 +11,51 @@ class USDConan(ConanFile):
     description = "Universal Scene Description (USD) is an efficient, scalable system for authoring, reading, and streaming time-sampled scene description for interchange between graphics applications."
     topics = ("cgi", "vfx", "dcc", "usd")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "with_imaging": [True, False], }
-    default_options = {"shared": True, "with_imaging": True, "boost:layout": "b2-default", "glew:shared": True}
+    options = {
+        "shared": [True, False],
+        "with_imaging": [True, False],
+    }
+    default_options = {
+        "shared": True,
+        "with_imaging": False,
+        "boost:layout": "b2-default",
+        "glew:shared": True,
+    }
     generators = "cmake"
-    exports_sources = 'patch_find_glew_to_find_debug_libs.patch'
+    exports_sources = "patch_find_glew_to_find_debug_libs.patch"
     short_paths = True
 
     requires = (
         "boost/1.70.0",
         "zlib/1.2.11",
         "tbb/2020.2",
-        "glew/2.1.0"
     )
 
+    def requirements(self):
+        if self.options.with_imaging:
+            self.requires("glew/2.1.0")
+            self.requires("OpenSubdiv/3.4.3@latios96/stable")
+
     def source(self):
-        tools.get("https://github.com/PixarAnimationStudios/USD/archive/v{}.zip".format(self.version))
-        tools.patch(patch_file='patch_find_glew_to_find_debug_libs.patch')
+        tools.get(
+            "https://github.com/PixarAnimationStudios/USD/archive/v{}.zip".format(
+                self.version
+            )
+        )
+        tools.patch(patch_file="patch_find_glew_to_find_debug_libs.patch")
 
     def _configure_cmake(self):
-        os.environ.update({
-            "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
-            "GLEW_LOCATION": self.deps_cpp_info["glew"].rootpath,
-        })
+        os.environ.update(
+            {"TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,}
+        )
 
         if self.options.with_imaging:
-            os.environ.update({
-                "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath})
+            os.environ.update(
+                {
+                    "OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath,
+                    "GLEW_LOCATION": self.deps_cpp_info["glew"].rootpath,
+                }
+            )
 
         cmake = CMake(self)
         if self.settings.build_type == "Debug":
@@ -62,13 +81,8 @@ class USDConan(ConanFile):
         cmake.install()
 
         if self.settings.os == "Windows":
-            self.copy("**.dll", 'bin', '',keep_path=False)
-            self.copy("**.lib", 'bin', '',keep_path=False)
-
-    def requirements(self):
-        if self.options.with_imaging:
-            self.requires("glew/2.1.0")
-            self.requires("OpenSubdiv/3.4.3@latios96/stable")
+            self.copy("**.dll", "bin", "", keep_path=False)
+            self.copy("**.lib", "bin", "", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = [
@@ -97,7 +111,8 @@ class USDConan(ConanFile):
             "ndr",
             "trace",
             "usdRender",
-            "usdVol"]
+            "usdVol",
+        ]
 
     def imports(self):
         self.copy("*.dll", "", "bin")
