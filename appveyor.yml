@@ -21,6 +21,6 @@ install:
 
 test_script:
   - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=False -s build_type=Release -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
-  #- C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=False -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=False -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
   - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=True -s build_type=Release -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
-  #- C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=True -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
+  - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=True -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
