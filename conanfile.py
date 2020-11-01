@@ -5,11 +5,11 @@ import os
 class USDConan(ConanFile):
     name = "USD"
     version = "20.08"
-    license = "<Put the package license here>"
-    author = "<Put your name here> <And your email here>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of USD here>"
-    topics = ("<Put some tag here>", "<here>", "<and here>")
+    license = "Apache-2.0"
+    author = "Jan Honsbrok <jan.honsbrokgmail.com>"
+    url = "https://github.com/Latios96/conan-USD"
+    description = "Universal Scene Description (USD) is an efficient, scalable system for authoring, reading, and streaming time-sampled scene description for interchange between graphics applications."
+    topics = ("cgi", "vfx", "dcc", "usd")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "with_imaging": [True, False], }
     default_options = {"shared": True, "with_imaging": True, "boost:layout": "b2-default", "glew:shared": True}
