@@ -4,6 +4,7 @@ env:
      - CONAN_USERNAME: "latios96"
      - CONAN_LOGIN_USERNAME: "latios96"
      - CONAN_CHANNEL: "channel"
+     - CONAN_UPLOAD: "https://api.bintray.com/conan/latios96/my_conan"
      
 linux: &linux
    os: linux
