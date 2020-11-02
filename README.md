@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/latios96/my_conan/USD:latios96/images/download.svg?version=3.4.3:stable) ](https://bintray.com/latios96/my_conan/USD:latios96/3.4.3:stable/link)
+[ ![Download](https://api.bintray.com/packages/latios96/my_conan/USD:latios96/images/download.svg?version=20.08:channel) ](https://bintray.com/latios96/my_conan/USD:latios96/20.08:channel/link)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/7412cbxwjx8nnlid?svg=true)](https://ci.appveyor.com/project/Latios96/conan-usd)
 [![Build Status](https://travis-ci.com/Latios96/conan-USD.svg?branch=main)](https://travis-ci.com/Latios96/conan-USD)

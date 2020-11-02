@@ -3,7 +3,7 @@ env:
      - CONAN_REFERENCE: "USD/20.08"
      - CONAN_USERNAME: "latios96"
      - CONAN_LOGIN_USERNAME: "latios96"
-     - CONAN_CHANNEL: "channel"
+     - CONAN_CHANNEL: "stable"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/latios96/my_conan"
      
 linux: &linux
