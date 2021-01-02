@@ -3,7 +3,7 @@ build: false
 environment:
   PYTHON: "C:\Python37-x64"
 
-  CONAN_REFERENCE: "USD/20.08"
+  CONAN_REFERENCE: "USD/20.11"
   CONAN_USERNAME: "latios96"
   CONAN_LOGIN_USERNAME: "latios96"
   CONAN_CHANNEL: "stable"
