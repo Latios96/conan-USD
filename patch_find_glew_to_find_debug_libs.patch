@@ -1,7 +1,7 @@
 diff --git a/USD-20.08/cmake/modules/FindGLEW.cmake b/cmake/modules/FindGLEW.cmake
 index b27be07..57bf4d0 100644
---- USD-20.08/cmake/modules/FindGLEW.cmake
-+++ USD-20.08/cmake/modules/FindGLEW.cmake
+--- USD-20.11/cmake/modules/FindGLEW.cmake
++++ USD-20.11/cmake/modules/FindGLEW.cmake
 @@ -51,9 +51,10 @@ if (WIN32)
 
      find_library(GLEW_LIBRARY
