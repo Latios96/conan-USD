@@ -4,7 +4,7 @@ import os
 
 class USDConan(ConanFile):
     name = "USD"
-    version = "20.11"
+    version = "21.02"
     license = "Apache-2.0"
     author = "Jan Honsbrok <jan.honsbrokgmail.com>"
     url = "https://github.com/Latios96/conan-USD"
@@ -19,13 +19,12 @@ class USDConan(ConanFile):
         "shared": True,
         "with_imaging": True,
         "boost:layout": "b2-default",
-        "glew:shared": True,
     }
     generators = "cmake"
     exports_sources = "patch_find_glew_to_find_debug_libs.patch"
     short_paths = True
 
-    requires = ("boost/1.70.0", "zlib/1.2.11", "tbb/2020.2", "glew/2.1.0")
+    requires = ("boost/1.70.0", "zlib/1.2.11", "tbb/2020.2")
 
     def source(self):
         tools.get(
@@ -33,13 +32,11 @@ class USDConan(ConanFile):
                 self.version
             )
         )
-        tools.patch(patch_file="patch_find_glew_to_find_debug_libs.patch")
 
     def _configure_cmake(self):
         os.environ.update(
             {
                 "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
-                "GLEW_LOCATION": self.deps_cpp_info["glew"].rootpath,
             }
         )
 
@@ -77,7 +74,6 @@ class USDConan(ConanFile):
 
     def requirements(self):
         if self.options.with_imaging:
-            self.requires("glew/2.1.0")
             self.requires("OpenSubdiv/3.4.3@latios96/stable")
 
     def package_info(self):
