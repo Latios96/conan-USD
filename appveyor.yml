@@ -3,7 +3,7 @@ build: false
 environment:
   PYTHON: "C:\Python37-x64"
 
-  CONAN_REFERENCE: "USD/20.11"
+  CONAN_REFERENCE: "USD/21.02"
   CONAN_USERNAME: "latios96"
   CONAN_LOGIN_USERNAME: "latios96"
   CONAN_CHANNEL: "stable"
@@ -33,7 +33,7 @@ for:
 
     test_script:
     - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=False -s build_type=Release -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
-    - C:\Python37-x64\Scripts\conan upload USD/20.08@latios96/stable --all -r=my_bintray
+    - C:\Python37-x64\Scripts\conan upload USD/21.02@latios96/stable --all -r=my_bintray
   -
     matrix:
       only:
@@ -41,4 +41,4 @@ for:
 
     test_script:
     - C:\Python37-x64\Scripts\conan create . -o USD:shared=True -o USD:with_imaging=False -s build_type=Debug -s compiler.version=%CONAN_VISUAL_VERSIONS% --build missing
-    - C:\Python37-x64\Scripts\conan upload USD/20.08@latios96/stable --all -r=my_bintray
+    - C:\Python37-x64\Scripts\conan upload USD/21.02@latios96/stable --all -r=my_bintray
