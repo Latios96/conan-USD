@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
-        imaging: [True, False]
+        imaging: ["True", "False"]
     name: "${{ matrix.os }} with imaging: ${{ matrix.imaging }}"
     steps:
       - uses: actions/checkout@v2
