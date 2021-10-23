@@ -1,0 +1,47 @@
+name: Github Actions CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
+        imaging: [True, False]
+    name: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: install conan
+        run: |
+          pip install conan conan_package_tools
+          conan --version
+      - name: setup frambffr remote
+        run: |
+          conan remote add framebffr https://frmbffr.com/artifactory/api/conan/conantest
+          conan user ci_github_actions -p -r=framebffr
+        env:
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+      - name: install apt packages
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install libxrandr-dev libxcursor-dev libxinerama-dev libxi-dev freeglut3 freeglut3-dev libxxf86vm1 libxxf86vm-dev
+      - name: setup conan profile
+        if: runner.os == 'Linux'
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+      - name: Setup cmake
+        if: runner.os == 'macOS'
+        uses: jwlawson/actions-setup-cmake@v1.7
+        with:
+          cmake-version: '3.18.x'
+      - name: build package
+        run: |
+          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Release
+          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Debug
