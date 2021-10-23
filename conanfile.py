@@ -6,7 +6,7 @@ class USDConan(ConanFile):
     name = "USD"
     version = "21.02"
     license = "Apache-2.0"
-    author = "Jan Honsbrok <jan.honsbrokgmail.com>"
+    author = "Jan Honsbrok <jan.honsbrok@gmail.com>"
     url = "https://github.com/Latios96/conan-USD"
     description = "Universal Scene Description (USD) is an efficient, scalable system for authoring, reading, and streaming time-sampled scene description for interchange between graphics applications."
     topics = ("cgi", "vfx", "dcc", "usd")
@@ -18,10 +18,9 @@ class USDConan(ConanFile):
     default_options = {
         "shared": True,
         "with_imaging": True,
-        "boost:layout": "b2-default",
+        "boost:layout": "b2-default", # todo do we need this?
     }
     generators = "cmake"
-    exports_sources = "patch_find_glew_to_find_debug_libs.patch"
     short_paths = True
 
     requires = ("boost/1.70.0", "zlib/1.2.11", "tbb/2020.2")
@@ -70,7 +69,7 @@ class USDConan(ConanFile):
 
         if self.settings.os == "Windows":
             self.copy("**.dll", "bin", "", keep_path=False)
-            self.copy("**.lib", "bin", "", keep_path=False)
+            self.copy("**.lib", "bin", "", keep_path=False)# todo do we need this?
 
     def requirements(self):
         if self.options.with_imaging:
