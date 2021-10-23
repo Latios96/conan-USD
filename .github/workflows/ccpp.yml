@@ -9,7 +9,7 @@ jobs:
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
         imaging: ["True", "False"]
-    name: "${{ matrix.os }} with imaging: ${{ matrix.imaging }}"
+    name: "${{ matrix.os }} imaging: ${{ matrix.imaging }}"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
@@ -43,5 +43,5 @@ jobs:
           cmake-version: '3.18.x'
       - name: build package
         run: |
-          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Release
-          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Debug
+          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Release --build missing
+          conan create . USD/21.02@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Debug --build missing
