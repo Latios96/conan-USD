@@ -16,3 +16,5 @@ target_link_libraries(example ${CONAN_LIBS})
 # add_test(NAME example
 #          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 #          COMMAND example)
+add_custom_command(TARGET example PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CONAN_LIB_DIRS_USD}/usd ${CMAKE_BINARY_DIR}/bin/usd)
