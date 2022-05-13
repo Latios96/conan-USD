@@ -4,7 +4,7 @@ import os
 
 class USDConan(ConanFile):
     name = "USD"
-    version = "21.02"
+    version = "22.05"
     license = "Apache-2.0"
     author = "Jan Honsbrok <jan.honsbrok@gmail.com>"
     url = "https://github.com/Latios96/conan-USD"
