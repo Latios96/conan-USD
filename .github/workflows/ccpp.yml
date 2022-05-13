@@ -9,7 +9,8 @@ jobs:
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
         imaging: ["True", "False"]
-    name: "${{ matrix.os }} imaging: ${{ matrix.imaging }}"
+        build_type: ["Release", "Debug"]
+    name: "${{ matrix.os }} imaging=${{ matrix.imaging }} build_type=${{build_type}}}"
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
@@ -43,8 +44,7 @@ jobs:
           cmake-version: '3.18.x'
       - name: build package
         run: |
-          conan create . USD/22.05@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Release --build missing
-          conan create . USD/22.05@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=Debug --build missing
+          conan create . USD/22.05@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
       - name: upload to framebffr
         run: |
           conan upload OpenSubdiv/3.4.4@latios96/stable --all -r=framebffr
