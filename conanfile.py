@@ -18,7 +18,7 @@ class USDConan(ConanFile):
     default_options = {
         "shared": True,
         "with_imaging": True,
-        "boost:layout": "b2-default", # todo do we need this?
+        "boost:layout": "b2-default",  # todo do we need this?
     }
     generators = "cmake"
     short_paths = True
@@ -69,7 +69,7 @@ class USDConan(ConanFile):
 
         if self.settings.os == "Windows":
             self.copy("**.dll", "bin", "", keep_path=False)
-            self.copy("**.lib", "bin", "", keep_path=False)# todo do we need this?
+            self.copy("**.lib", "bin", "", keep_path=False)  # todo do we need this?
 
     def requirements(self):
         if self.options.with_imaging:
@@ -78,32 +78,55 @@ class USDConan(ConanFile):
     def package_info(self):
         self.cpp_info.libs = [
             "ar",
-            "pcp",
-            "usd",
-            "usdRi",
-            "vt",
             "arch",
-            "plug",
-            "usdGeom",
-            "usdShade",
-            "work",
             "gf",
-            "sdf",
-            "usdHydra",
-            "usdSkel",
             "js",
-            "sdr",
-            "usdLux",
-            "usdUI",
             "kind",
-            "tf",
-            "usdMedia",
-            "usdUtils",
             "ndr",
+            "pcp",
+            "plug",
+            "sdf",
+            "sdr",
+            "tf",
             "trace",
+            "usd",
+            "usdGeom",
+            "usdHydra",
+            "usdLux",
+            "usdMedia",
             "usdRender",
+            "usdRi",
+            "usdShade",
+            "usdSkel",
+            "usdUI",
+            "usdUtils",
             "usdVol",
+            "vt",
+            "work",
         ]
+        if self.options.with_imaging:
+            self.cpp_info.libs.extend(
+                [
+                    "cameraUtil",
+                    "garch",
+                    "glf",
+                    "hd",
+                    "hdSt",
+                    "hdx",
+                    "hf",
+                    "hgi",
+                    "hgiGL",
+                    "hgiInterop",
+                    "hio",
+                    "pxOsd",
+                    "usdAppUtils",
+                    "usdImaging",
+                    "usdImagingGL",
+                    "usdRiImaging",
+                    "usdSkelImaging",
+                    "usdVolImaging",
+                ]
+            )
 
     def imports(self):
         self.copy("*.dll", "", "bin")
