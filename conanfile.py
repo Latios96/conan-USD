@@ -131,3 +131,5 @@ class USDConan(ConanFile):
     def imports(self):
         self.copy("*.dll", "", "bin")
         self.copy("*.dylib", "", "lib")
+
+
