@@ -23,7 +23,7 @@ class USDConan(ConanFile):
     generators = "cmake"
     short_paths = True
 
-    requires = ("boost/1.70.0", "zlib/1.2.11", "tbb/2020.2")
+    requires = ("boost/1.70.0", "zlib/1.2.11", "onetbb/2020.3")
 
     def source(self):
         tools.get(
@@ -35,7 +35,7 @@ class USDConan(ConanFile):
     def _configure_cmake(self):
         os.environ.update(
             {
-                "TBB_ROOT": self.deps_cpp_info["tbb"].rootpath,
+                "TBB_ROOT": self.deps_cpp_info["onetbb"].rootpath,
             }
         )
 
@@ -73,7 +73,7 @@ class USDConan(ConanFile):
 
     def requirements(self):
         if self.options.with_imaging:
-            self.requires("OpenSubdiv/3.4.3@latios96/stable")
+            self.requires("OpenSubdiv/3.4.4@latios96/stable")
 
     def package_info(self):
         self.cpp_info.libs = [
