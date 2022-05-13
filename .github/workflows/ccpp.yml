@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: force ln line endings
         run: |
-          git config --system core.autocrlf false
-          git config --system core.eol lf
+          sudo git config --system core.autocrlf false
+          sudo git config --system core.eol lf
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
