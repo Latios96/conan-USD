@@ -12,10 +12,11 @@ jobs:
         build_type: ["Release", "Debug"]
     name: "${{ matrix.os }} imaging=${{ matrix.imaging }} build_type=${{matrix.build_type}}}"
     steps:
-      - name: force ln line endings
+      - name: force ln line endings for Windows
+        if: runner.os == 'Windows'
         run: |
-          sudo git config --system core.autocrlf false
-          sudo git config --system core.eol lf
+          git config --system core.autocrlf false
+          git config --system core.eol lf
       - uses: actions/checkout@v2
       - name: Set up Python 3.7
         uses: actions/setup-python@v1
