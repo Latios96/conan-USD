@@ -47,4 +47,4 @@ jobs:
           conan create . USD/22.05@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
       - name: upload to framebffr
         run: |
-          conan upload OpenSubdiv/3.4.4@latios96/stable --all -r=framebffr
+          conan upload USD/22.05@latios96/stable --all -r=framebffr
