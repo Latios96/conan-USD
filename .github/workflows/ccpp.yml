@@ -22,7 +22,7 @@ jobs:
           conan --version
       - name: setup frambffr remote
         run: |
-          conan remote add framebffr https://frmbffr.com/artifactory/api/conan/conantest
+          conan remote add framebffr https://artifactory.frmbffr.com/artifactory/api/conan/conan-repository
           conan user ci_github_actions -p -r=framebffr
         env:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
