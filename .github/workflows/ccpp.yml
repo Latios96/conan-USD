@@ -49,7 +49,7 @@ jobs:
           cmake-version: '3.18.x'
       - name: build package
         run: |
-          conan create . USD/22.05@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
+          conan create . USD/22.08@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
       - name: upload to framebffr
         run: |
-          conan upload USD/22.05@latios96/stable --all -r=framebffr
+          conan upload USD/22.08@latios96/stable --all -r=framebffr
