@@ -19,6 +19,7 @@ class USDConan(ConanFile):
         "shared": True,
         "with_imaging": True,
         "boost:layout": "b2-default",  # todo do we need this?
+        "opensubdiv:with_opengl": True
     }
     generators = "cmake"
     short_paths = True
@@ -41,7 +42,7 @@ class USDConan(ConanFile):
 
         if self.options.with_imaging:
             os.environ.update(
-                {"OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["OpenSubdiv"].rootpath}
+                {"OPENSUBDIV_ROOT_DIR": self.deps_cpp_info["opensubdiv"].rootpath}
             )
 
         cmake = CMake(self)
@@ -73,7 +74,7 @@ class USDConan(ConanFile):
 
     def requirements(self):
         if self.options.with_imaging:
-            self.requires("OpenSubdiv/3.4.4@latios96/stable")
+            self.requires("opensubdiv/3.4.4@")
 
     def package_info(self):
         self.cpp_info.libs = [
