@@ -8,7 +8,6 @@ from conan.errors import ConanInvalidConfiguration
 
 required_conan_version = ">=1.48.0"
 
-# add CI fail-fast=False, add matrix for all options that are not related to dependencies, they should just be turned on by default
 class UsdConan(ConanFile):
     name = "usd"
     license = "LicenseRef-LICENSE.txt"
@@ -184,28 +183,13 @@ class UsdConan(ConanFile):
         cmake = self._configure_cmake()
         cmake.install()
 
-    # todo do this
-    """def package_info(self): 
+    def package_info(self):
         self.cpp_info.set_property("cmake_file_name", "USD")
 
         self.cpp_info.names["cmake_find_package"] = "USD"
         self.cpp_info.names["cmake_find_package_multi"] = "USD"
 
-        self.cpp_info.components["osdcpu"].libs = ["osdCPU"]
-        self.cpp_info.components["osdcpu"].set_property("cmake_target_name", "OpenSubdiv::osdcpu")
-
-        if self.options.with_tbb:
-            self.cpp_info.components["osdcpu"].requires = ["onetbb::onetbb"]
-
-        if self._osd_gpu_enabled:
-            self.cpp_info.components["osdgpu"].libs = ["osdGPU"]
-            self.cpp_info.components["osdgpu"].set_property("cmake_target_name", "OpenSubdiv::osdgpu")
-            dl_required = self.options.with_opengl or self.options.with_opencl
-            if self.settings.os in ["Linux", "FreeBSD"] and dl_required:
-                self.cpp_info.components["osdgpu"].system_libs = ["dl"]"""
-
-    def package_info(self):
-        self.cpp_info.libs = [
+        libs = [
             "usd_ar",
             "usd_arch",
             "usd_gf",
@@ -233,8 +217,9 @@ class UsdConan(ConanFile):
             "usd_vt",
             "usd_work",
         ]
+
         if self.options.with_imaging:
-            self.cpp_info.libs.extend(
+            libs.extend(
                 [
                     "usd_cameraUtil",
                     "usd_garch",
@@ -256,3 +241,14 @@ class UsdConan(ConanFile):
                     "usd_usdVolImaging",
                 ]
             )
+
+        for lib in libs:
+            self.cpp_info.components[lib].libs = [lib]
+            self.cpp_info.components[lib].set_property("cmake_target_name", f"USD::{lib}")
+            self.cpp_info.components[lib].requires = ["onetbb::onetbb","boost::boost","zlib::zlib", "zstd::zstd"]
+            if self.options.with_alembic:
+                self.cpp_info.components[lib].requires.append("alembic::alembic")
+            if self.options.with_draco:
+                self.cpp_info.components[lib].requires.append("draco::draco")
+            if self.options.with_imaging:
+                self.cpp_info.components[lib].requires.append("opensubdiv::opensubdiv")

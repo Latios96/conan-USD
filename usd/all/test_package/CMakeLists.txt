@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
-find_package(OpenSubdiv REQUIRED)
+find_package(USD REQUIRED)
 
 add_executable(example example.cpp)
-target_link_libraries(example OpenSubdiv::OpenSubdiv) # todo link to correct USD lib
+target_link_libraries(example USD::USD) # todo link to correct USD lib

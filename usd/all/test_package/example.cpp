@@ -3,6 +3,7 @@
 #include <iostream>
 
 int main() {
-  pxr::UsdStage::CreateInMemory();
-  std::cout << "works" << std::endl;
+  //std::cout << "try to create stage" << std::endl;
+  //pxr::UsdStage::CreateInMemory();
+  //std::cout << "works" << std::endl;
 }
