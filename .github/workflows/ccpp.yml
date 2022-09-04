@@ -6,6 +6,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
         imaging: ["True", "False"]
@@ -48,8 +49,6 @@ jobs:
         with:
           cmake-version: '3.18.x'
       - name: build package
+        working-directory: "usd/all"
         run: |
-          conan create . USD/22.08@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
-      - name: upload to framebffr
-        run: |
-          conan upload USD/22.08@latios96/stable --all -r=framebffr
+          conan create . USD/22.08@ -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
