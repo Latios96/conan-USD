@@ -51,4 +51,4 @@ jobs:
       - name: build package
         working-directory: "usd/all"
         run: |
-          conan create . USD/22.08@ -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
+          conan create . usd/22.08@ -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
