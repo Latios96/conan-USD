@@ -1,0 +1,4 @@
+sources:
+  "22.08":
+    url: "https://github.com/PixarAnimationStudios/USD/archive/v22.08.zip"
+    sha256: "bc3e012927ea93ff2d8f6986ee7608aeab6ee6e38bc32b332d83c006bd8487af"
