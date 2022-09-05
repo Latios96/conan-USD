@@ -47,7 +47,7 @@ jobs:
         if: runner.os == 'macOS'
         uses: jwlawson/actions-setup-cmake@v1.7
         with:
-          cmake-version: '3.18.x'
+          cmake-version: '3.23.x'
       - name: build package
         working-directory: "usd/all"
         run: |
