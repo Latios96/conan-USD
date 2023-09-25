@@ -6,6 +6,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
         build_type: ["Release", "Debug"]
