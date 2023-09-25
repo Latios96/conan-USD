@@ -34,6 +34,10 @@ class USDConan(ConanFile):
             )
         )
 
+    def config_options(self):
+        if self.settings.os != "Macos":
+            del self.options.with_metal
+
     def _configure_cmake(self):
         os.environ.update(
             {
