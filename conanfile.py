@@ -4,7 +4,7 @@ import os
 
 class USDConan(ConanFile):
     name = "USD"
-    version = "22.08"
+    version = "23.08"
     license = "Apache-2.0"
     author = "Jan Honsbrok <jan.honsbrok@gmail.com>"
     url = "https://github.com/Latios96/conan-USD"
@@ -28,7 +28,7 @@ class USDConan(ConanFile):
 
     def source(self):
         tools.get(
-            "https://github.com/PixarAnimationStudios/USD/archive/v{}.zip".format(
+            "https://github.com/PixarAnimationStudios/OpenUSD/archive/v{}.zip".format(
                 self.version
             )
         )
@@ -57,7 +57,7 @@ class USDConan(ConanFile):
         cmake.definitions["PXR_ENABLE_METAL_SUPPORT"] = False
         cmake.definitions["Boost_USE_STATIC_LIBS"] = True
         cmake.definitions["-DBOOST_AUTO_LINK_SYSTEM"] = True
-        cmake.configure(source_folder="USD-{}".format(self.version))
+        cmake.configure(source_folder="OpenUSD-{}".format(self.version))
         return cmake
 
     def build(self):
