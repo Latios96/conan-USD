@@ -8,9 +8,8 @@ jobs:
     strategy:
       matrix:
         os: [ "windows-2019", "ubuntu-20.04", "macos-latest" ]
-        imaging: ["True", "False"]
         build_type: ["Release", "Debug"]
-    name: "${{ matrix.os }} imaging=${{ matrix.imaging }} build_type=${{matrix.build_type}}}"
+    name: "${{ matrix.os }} build_type=${{matrix.build_type}}}"
     steps:
       - name: force ln line endings for Windows
         if: runner.os == 'Windows'
@@ -49,7 +48,7 @@ jobs:
           cmake-version: '3.18.x'
       - name: build package
         run: |
-          conan create . USD/22.08@latios96/stable -o USD:with_imaging=${{ matrix.imaging }} -s build_type=${{ matrix.build_type }} --build missing
+          conan create . USD/23.08@latios96/stable -o USD:with_imaging=True -s build_type=${{ matrix.build_type }} --build missing
       - name: upload to framebffr
         run: |
-          conan upload USD/22.08@latios96/stable --all -r=framebffr
+          conan upload USD/23.08@latios96/stable --all -r=framebffr
