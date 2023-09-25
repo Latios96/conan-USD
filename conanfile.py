@@ -19,7 +19,8 @@ class USDConan(ConanFile):
         "shared": True,
         "with_imaging": True,
         "boost:layout": "b2-default",  # todo do we need this?
-        "opensubdiv:with_opengl": True
+        "opensubdiv:with_opengl": True,
+        "opensubdiv:with_metal": True
     }
     generators = "cmake"
     short_paths = True
@@ -74,7 +75,7 @@ class USDConan(ConanFile):
 
     def requirements(self):
         if self.options.with_imaging:
-            self.requires("opensubdiv/3.4.4@")
+            self.requires("opensubdiv/3.5.0@")
 
     def package_info(self):
         self.cpp_info.libs = [
