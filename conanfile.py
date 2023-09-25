@@ -20,6 +20,7 @@ class USDConan(ConanFile):
         "with_imaging": True,
         "boost:layout": "b2-default",  # todo do we need this?
         "opensubdiv:with_opengl": True,
+        "opensubdiv:with_metal": True
     }
     generators = "cmake"
     short_paths = True
@@ -34,8 +35,8 @@ class USDConan(ConanFile):
         )
 
     def config_options(self):
-        if self.settings.os == "Macos":
-            self.options["opensubdiv:with_metal"] = True
+        if self.settings.os != "Macos":
+            self.options.rm_safe("opensubdiv:with_metal")
 
     def _configure_cmake(self):
         os.environ.update(
@@ -136,3 +137,5 @@ class USDConan(ConanFile):
     def imports(self):
         self.copy("*.dll", "", "bin")
         self.copy("*.dylib", "", "lib")
+
+
