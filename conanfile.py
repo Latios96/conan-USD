@@ -25,7 +25,7 @@ class USDConan(ConanFile):
     generators = "cmake"
     short_paths = True
 
-    requires = ("boost/1.76.0", "zlib/1.2.11", "onetbb/2020.3")
+    requires = ("boost/1.78.0", "zlib/1.2.13", "onetbb/2020.3")
 
     def source(self):
         tools.get(
