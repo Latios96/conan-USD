@@ -24,7 +24,7 @@ jobs:
           python-version: 3.7
       - name: install conan
         run: |
-          pip install conan conan_package_tools
+          pip install conan==1.59.0 conan_package_tools
           conan --version
       - name: setup frambffr remote
         run: |
@@ -47,9 +47,13 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.7
         with:
           cmake-version: '3.18.x'
-      - name: build package
+      - name: build dependencies
         run: |
-          conan create . USD/23.08@latios96/stable -o USD:with_imaging=True -s build_type=${{ matrix.build_type }} --build missing
+          conan install . USD/23.08@latios96/stable -o USD:with_imaging=True -s build_type=${{ matrix.build_type }} --build missing
+      - name: upload dependencies
+        run: conan upload "*" --all --confirm -r=framebffr --parallel
+      - name: build package
+        run: conan create . USD/23.08@latios96/stable -o USD:with_imaging=True -s build_type=${{ matrix.build_type }}
       - name: upload to framebffr
         run: |
           conan upload USD/23.08@latios96/stable --all -r=framebffr
