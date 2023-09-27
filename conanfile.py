@@ -36,7 +36,7 @@ class USDConan(ConanFile):
 
     def config_options(self):
         if self.settings.os != "Macos":
-            self.options.pop("opensubdiv:with_metal")
+            self.options.rm_safe("opensubdiv:with_metal")
 
     def _configure_cmake(self):
         os.environ.update(
